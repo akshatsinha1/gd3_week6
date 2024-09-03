@@ -10,9 +10,9 @@ public class gameManager : MonoBehaviour
 
     [SerializeField] Vector2 spawnRate;
     // Start is called before the first frame update
+
     void Start()
     {
-        //InvokeRepeating("Function Name", 2, 3);
         StartCoroutine(spawnTargets());
     }
 
@@ -29,6 +29,11 @@ public class gameManager : MonoBehaviour
             int randomSpawnIndex = Random.Range(0, targetPrefabs.Length);
             Instantiate(targetPrefabs[randomSpawnIndex]);
         }
+    }
+
+    public void updateScore(int scoreChange)
+    {
+        score += scoreChange;
     }
    
 }

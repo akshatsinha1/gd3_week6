@@ -8,6 +8,8 @@ public class TargetScript : MonoBehaviour
     public Vector2 randomForce, randomTorque;
     public float xRange;
     gameManager _gm;
+    public int myScore = 2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +32,7 @@ public class TargetScript : MonoBehaviour
     {
         if(transform.tag == "GoodObject")
         {
-            _gm.score++;
+            _gm.updateScore(myScore);
             Destroy(gameObject);
         }
 
