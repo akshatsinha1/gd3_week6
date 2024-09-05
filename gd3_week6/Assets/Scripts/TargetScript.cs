@@ -22,7 +22,7 @@ public class TargetScript : MonoBehaviour
 
 
         //add a random rotation/torque
-        rb.AddTorque(Random.Range(randomTorque.x, randomTorque.y), Random.Range(randomTorque.x, randomTorque.y), 0, ForceMode.Impulse);
+        rb.AddTorque(Random.Range(randomTorque.x, randomTorque.y), Random.Range(randomTorque.x, randomTorque.y), Random.Range(randomTorque.x, randomTorque.y), ForceMode.Impulse);
 
         //random starting position
         transform.position = new Vector3(Random.Range(-xRange, xRange), -1, 0);
@@ -39,6 +39,10 @@ public class TargetScript : MonoBehaviour
         if(transform.tag == "BadObject")
         {
             _gm.lives--;
+            if (_gm.lives <= 0) _gm.gameOver();
+
+            _gm.livesText.text = "Lives: " + _gm.lives.ToString();
+
             Destroy(gameObject);
         }
     }

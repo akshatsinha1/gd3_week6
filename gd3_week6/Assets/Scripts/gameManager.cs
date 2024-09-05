@@ -1,24 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
     public GameObject[] targetPrefabs;
     public bool isGameOver = false;
     public int score, lives;
-
-    [SerializeField] Vector2 spawnRate;
+    public GameObject gameOverScreen;
+    public TMP_Text livesText, scoreText, gameOverScore, highScoreText;
+    public Vector2 spawnRate;
     // Start is called before the first frame update
 
     void Start()
     {
         StartCoroutine(spawnTargets());
-    }
-
-    private void Update()
-    {
-        if (lives <= 0) isGameOver = true;
+        livesText.text = "Lives: " + lives.ToString();
+        scoreText.text = "Score: " + score.ToString();
     }
 
     IEnumerator spawnTargets()
@@ -34,6 +34,29 @@ public class gameManager : MonoBehaviour
     public void updateScore(int scoreChange)
     {
         score += scoreChange;
+        scoreText.text = "Score: " + score.ToString();
+    }
+
+    public void gameOver()
+    {
+       
+        isGameOver = true;
+        gameOverScreen.SetActive(true);
+        gameOverScore.text = "Your Score: " + score.ToString();
+        highScoreText.text = "High Score: " + PlayerPrefs.GetInt("highscore");
+        Time.timeScale = 0;
+
+        if(PlayerPrefs.GetInt("highscore") < score)
+        {
+            PlayerPrefs.SetInt("highscore", score);
+        }
+        
+    }
+
+    public void restartScene()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
    
 }
