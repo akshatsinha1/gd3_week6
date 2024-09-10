@@ -10,9 +10,12 @@ public class TargetScript : MonoBehaviour
     gameManager _gm;
     public int myScore = 2;
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
+        
         _gm = GameObject.FindObjectOfType<gameManager>();
 
         rb = GetComponent<Rigidbody>();
@@ -20,12 +23,23 @@ public class TargetScript : MonoBehaviour
         //add a random upwards force
         rb.AddForce(Vector3.up * Random.Range(randomForce.x, randomForce.y), ForceMode.Impulse);
 
-
+        
+        
         //add a random rotation/torque
         rb.AddTorque(Random.Range(randomTorque.x, randomTorque.y), Random.Range(randomTorque.x, randomTorque.y), Random.Range(randomTorque.x, randomTorque.y), ForceMode.Impulse);
 
         //random starting position
         transform.position = new Vector3(Random.Range(-xRange, xRange), -1, 0);
+    }
+
+    private void OnMouseOver()
+    {
+        //gameobject.findojectoftype<cursormanager>().isOverBug = true;
+        
+    }
+    private void OnMouseExit()
+    {
+        //gameobject.findojectoftype<cursormanager>().isOverBug = false;
     }
 
     private void OnMouseDown()
